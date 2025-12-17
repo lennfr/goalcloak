@@ -1,6 +1,6 @@
 # goalcloak
 
-A cloaked version of **RocketGoal.io** designed for Chrome.
+A cloaked and unblocked version of **RocketGoal.io** designed for Chrome.
 
 - Cloaks `https://rocketgoal.io`
 - Invisible to most browser extensions
