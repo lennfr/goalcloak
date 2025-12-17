@@ -1,0 +1,53 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Tab</title>
+<body>
+        <div class="cloak-wrapper">
+            <button class="cloak-btn" onclick="cloak('https://rocketgoal.io', 'https://google.com');">
+                Cloak
+            </button>
+        </div>
+
+    </div>
+
+    <script>
+    const cloak = function(url, redirect) {
+  try {
+    const newWindow = window.open('about:blank', '_blank');
+    if (newWindow) {
+      newWindow.document.write(`
+        <!DOCTYPE html>
+        <html>
+          <head>
+            <title>New Tab</title>
+            <style>
+              body { margin: 0; padding: 0; overflow: hidden; }
+              iframe { border: none; width: 100vw; height: 100vh; }
+            </style>
+          </head>
+          <body>
+            <iframe src="${url}"></iframe>
+          </body>
+        </html>
+      `);
+      newWindow.document.close();
+    } else {
+      window.location.href = url;
+    }
+    if (redirect) {
+      window.onbeforeunload = null;
+      window.location.replace(redirect);
+    }
+  } catch (error) {
+    console.error('Cloak error:', error);
+    window.location.href = url;
+  }
+};
+        </script>
+
+</body>
+</html>
