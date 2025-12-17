@@ -2,17 +2,38 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>New Tab</title>
-<body>
-        <div class="cloak-wrapper">
-            <button class="cloak-btn" onclick="cloak('https://rocketgoal.io', 'https://google.com');">
-                Cloak
-            </button>
-        </div>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>New Tab</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #000;
+      font-family: Arial, sans-serif;
+    }
 
-    </div>
+    .open-text {
+      font-size: 4rem;
+      font-weight: 700;
+      cursor: pointer;
+      user-select: none;
+      text-align: center;
+    }
+
+    .open-text:hover {
+      opacity: 0.8;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="open-text" onclick="cloak('/game.html', 'https://google.com');">
+    click to open game
+  </div>
 
     <script>
     const cloak = function(url, redirect) {
