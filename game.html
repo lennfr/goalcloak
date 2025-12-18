@@ -1258,7 +1258,18 @@ function IsGameFocusedInternal() {
         updateBannerVisibility();
       }
 
-https://www.view-page-source.com/#:~:text=var%20buildUrl%20%3D%20%22https,0.302%22%2C%0A%20%20%20%20%20%20%20%20showBanner%3A%20unityShowBanner%2C%0A%20%20%20%20%20%20%7D%3B
+      var buildUrl = "https://pockethaven.lon1.cdn.digitaloceanspaces.com/rocketgoal/21";
+      var loaderUrl = buildUrl + "/b23dd96997961653e2825455633aac82.loader.js";
+      var config = {
+        dataUrl: buildUrl + "/90b74d2550f20203a2bfa2c58855f598.data.unityweb",
+        frameworkUrl: buildUrl + "/dc22ac4cb424c4748b22fa39a68ad94b.framework.js.unityweb",
+        codeUrl: buildUrl + "/e01e0c527c29ad45c813c2caee179ddb.wasm.unityweb",
+        streamingAssetsUrl: "StreamingAssets",
+        companyName: "PocketHaven",
+        productName: "RocketGoal",
+        productVersion: "0.302",
+        showBanner: unityShowBanner,
+      };
 
       // By default Unity keeps WebGL canvas render target size matched with
       // the DOM size of the canvas element (scaled by window.devicePixelRatio)
