@@ -8,14 +8,6 @@
   ],
   "routes": [
     {
-      "src": "/game",
-      "dest": "server.js"
-    },
-    {
-      "src": "/clear-cache",
-      "dest": "server.js"
-    },
-    {
       "src": "/(.*)",
       "dest": "server.js"
     }
