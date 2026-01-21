@@ -190,3 +190,5 @@ app.get('/clear-cache', (req, res) => {
 app.listen(PORT, () => {
   console.log(`Mirror server running at http://localhost:${PORT}`);
 });
+
+module.exports = app;
