@@ -83,6 +83,10 @@ async function processHtml(html, baseUrl) {
 
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
 app.get('/game', async (req, res) => {
   try {
     console.log(`Fetching ${TARGET_URL}...`);
@@ -94,6 +98,7 @@ app.get('/game', async (req, res) => {
     
     console.log('Processing HTML...');
     const processedHtml = await processHtml(html, TARGET_URL);
+    
     console.log('Sending processed HTML');
     res.setHeader('Content-Type', 'text/html');
     res.send(processedHtml);
