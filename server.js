@@ -81,10 +81,84 @@ async function processHtml(html, baseUrl) {
   return $.html();
 }
 
-app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+  res.send(`
+  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>New Tab</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #000;
+      font-family: Arial, sans-serif;
+    }
+
+    .open-text {
+      font-size: 4rem;
+      font-weight: 700;
+      cursor: pointer;
+      user-select: none;
+      text-align: center;
+    }
+
+    .open-text:hover {
+      opacity: 0.8;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="open-text" onclick="cloak('/game', 'https://google.com');">
+    click to open game
+  </div>
+
+    <script>
+    const cloak = function(url, redirect) {
+  try {
+    const newWindow = window.open('about:blank', '_blank');
+    if (newWindow) {
+      newWindow.document.write(`
+        <!DOCTYPE html>
+        <html>
+          <head>
+            <title>New Tab</title>
+            <style>
+              body { margin: 0; padding: 0; overflow: hidden; }
+              iframe { border: none; width: 100vw; height: 100vh; }
+            </style>
+          </head>
+          <body>
+            <iframe src="${url}"></iframe>
+          </body>
+        </html>
+      `);
+      newWindow.document.close();
+    } else {
+      window.location.href = url;
+    }
+    if (redirect) {
+      window.onbeforeunload = null;
+      window.location.replace(redirect);
+    }
+  } catch (error) {
+    console.error('Cloak error:', error);
+    window.location.href = url;
+  }
+};
+        </script>
+
+</body>
+</html>
+  `);
 });
 
 app.get('/game', async (req, res) => {
@@ -93,13 +167,13 @@ app.get('/game', async (req, res) => {
     const html = await fetchResource(TARGET_URL);
     
     if (!html) {
-      return res.status(500).send('Failed to fetch target website');
+      return res.status(500).send('Failed to fetch website');
     }
     
-    console.log('Processing HTML...');
+    console.log('Processing...');
     const processedHtml = await processHtml(html, TARGET_URL);
     
-    console.log('Sending processed HTML');
+    console.log('Sending HTML');
     res.setHeader('Content-Type', 'text/html');
     res.send(processedHtml);
   } catch (error) {
